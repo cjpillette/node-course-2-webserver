@@ -6,12 +6,9 @@ const port = process.env.PORT || 3000;
 
 var app = express();
 
-
-//express middleware
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 
-		//app.use rendered in this sequential order
 		app.use((req, res, next)=>{
 			var now = new Date().toString();
 			var log = `${now}: ${req.method} ${req.url}`;
@@ -22,11 +19,7 @@ app.set('view engine', 'hbs');
 			next();
 		});
 
-		//all pages are stucked on the maintenance page. no possibility of next
-		// app.use((req, res, next)=>{
-		// 	res.render('maintenance.hbs');
-		// });
-
+		
 		app.use(express.static(__dirname + '/public'));
 
 hbs.registerHelper('getCurrentYear', ()=>{
